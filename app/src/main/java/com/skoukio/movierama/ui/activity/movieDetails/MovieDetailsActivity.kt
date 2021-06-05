@@ -36,10 +36,11 @@ class MovieDetailsActivity : AppCompatActivity(), MovieDetailsView {
     }
 
     private fun initResources() {
-        val movie = intent?.extras?.getParcelable<MovieModel>(DefinitionsApi.BUNDLE.MOVIE)
+        intent?.extras?.getParcelable<MovieModel>(DefinitionsApi.BUNDLE.MOVIE)
     }
 
     private fun initLayout() {
+        similarMoviesRecyclerViewAdapter = SimilarMoviesRecyclerViewAdapter()
         similarMoviesRecyclerView?.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         similarMoviesRecyclerView?.adapter = similarMoviesRecyclerViewAdapter

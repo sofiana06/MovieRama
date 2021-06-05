@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:textColor="@color/gray_tundora"
+        android:textColor="@color/gray_ghost"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Glenn Kenny" />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:textColor="?colorOnBackground"
+        android:textColor="@color/blue_cloud_burst"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reviewerName"
         tools:text="How should a dinosaur movie be? The makers of the first dinora" />

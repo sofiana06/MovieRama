@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MovieRama</string>
 
+    <string name="movie_progress_bar_text">Loading more...</string>
     <string name="movie_rama_search">Search MovieRama</string>
     <string name="movie_rama_loading_more">Loading more</string>
     <string name="movie_rama_description">DESCRIPTION</string>

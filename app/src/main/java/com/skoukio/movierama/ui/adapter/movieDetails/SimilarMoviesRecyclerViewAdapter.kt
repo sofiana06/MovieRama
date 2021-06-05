@@ -5,8 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.skoukio.movierama.R
+import com.skoukio.movierama.common.extensions.getFormattedDate
 import com.skoukio.movierama.models.data.home.MovieModel
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.activity_movie_details.*
+import kotlinx.android.synthetic.main.activity_movie_details.favouriteImage
+import kotlinx.android.synthetic.main.activity_movie_details.movieTitle
 
 class SimilarMoviesRecyclerViewAdapter :
     RecyclerView.Adapter<SimilarMoviesRecyclerViewAdapter.SimilarMoviesViewHolder>() {
@@ -30,23 +34,25 @@ class SimilarMoviesRecyclerViewAdapter :
         holder: SimilarMoviesViewHolder,
         position: Int
     ) {
-        val movie = movieList[position]
-        holder.bind(movie)
+      //  val movie = movieList[position]
+//        holder.bind(movie)
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        return 10
+      //  return movieList.size
     }
 
     class SimilarMoviesViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
         LayoutContainer {
-        fun bind(movie: MovieModel) {
-//            movieImage?.loadImage(movie.image)
+//        fun bind(movie: MovieModel) {
+//          //  movieImage?.loadImage(movie.poster)
 //            movieTitle?.text = movie.title
-//            dateText?.text = movie.releaseDate.getFormattedDate(GLOBAL_PATTERN_DD_MM_YYYY)
+//            dateTitle?.text = movie.releaseDate?.getFormattedDate()
+//            ratingBarWidget?.rating = (movie.rating?.toFloat() ?: 0f) * 5 / 10
 //            favouriteImage.setOnClickListener {
 //            }
-        }
+//        }
     }
 }

@@ -5,9 +5,11 @@
     <dimen name="common_four_dp">4dp</dimen>
     <dimen name="common_eight_dp">8dp</dimen>
     <dimen name="common_ten_dp">10dp</dimen>
+    <dimen name="common_fourteen_dp">14dp</dimen>
     <dimen name="common_sixteen_dp">16dp</dimen>
     <dimen name="common_twenty_dp">20dp</dimen>
     <dimen name="common_one_hundred_seventy_dp">170dp</dimen>
+    <dimen name="common_one_hundred_twenty_seven_dp">127dp</dimen>
     <dimen name="common_two_hundred_dp">200dp</dimen>
     <dimen name="common_two_hundred_fifty_dp">250dp</dimen>
 

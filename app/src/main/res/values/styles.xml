@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.Rating.RatingBar" parent="Widget.AppCompat.RatingBar.Small">
-        <item name="colorControlNormal">@color/teal_200</item>
-        <item name="colorControlActivated">@color/purple_700</item>
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlNormal">@color/blue_cerulean</item>
+        <item name="colorControlActivated">@color/gray_ghost</item>
+        <item name="android:progressTint">@color/blue_cerulean</item>
+        <item name="backgroundTint">@color/gray_ghost</item>
         <item name="android:numStars">5</item>
         <item name="android:stepSize">0.5</item>
     </style>

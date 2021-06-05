@@ -13,19 +13,20 @@
         android:background="@color/white"
         android:cursorVisible="false"
         android:gravity="start|center_vertical"
+        android:hint="@string/movie_rama_search"
         android:inputType="text"
         android:lines="1"
         android:maxLines="1"
-        android:textColor="@color/gray_tundora"
-        android:textColorHint="@color/gray_cloudy"
+        android:textColor="@color/gray_french"
+        android:textColorHint="@color/gray_ghost"
         android:textCursorDrawable="@drawable/drawable_cursor_color"
         android:textSize="@dimen/common_text_sixteen_sp"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:searchIcon="@drawable/ic_search_icon"
-        android:hint="@string/movie_rama_search" />
+        app:queryHint="@string/movie_rama_search"
+        app:searchIcon="@drawable/ic_search_icon" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/moviesSwipeRefreshLayout"
@@ -47,4 +48,10 @@
             tools:itemCount="5"
             tools:listitem="@layout/row_movie" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include
+        layout="@layout/layout_loading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
