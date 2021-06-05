@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/common_two_hundred_fifty_dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/common_ten_dp"
+    app:cardElevation="@dimen/common_twenty_dp"
+    app:cardPreventCornerOverlap="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/movieImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_one_hundred_seventy_dp"
+            android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="@dimen/common_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="@dimen/common_ten_dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="?colorOnBackground"
+            android:textSize="@dimen/common_text_twenty_sp"
+            app:layout_constraintEnd_toStartOf="@+id/favouriteImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieImage"
+            android:text="Jurassic World: Fallen Kingdom" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/favouriteImage"
+            android:layout_width="@dimen/common_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_four_dp"
+            android:layout_marginEnd="@dimen/common_twenty_dp"
+            android:background="@drawable/ic_icon_favorite"
+            app:layout_constraintBottom_toBottomOf="@+id/dateText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/movieTitle" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/ratingBarWidget"
+            style="@style/AppTheme.Rating.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/movieTitle"
+            app:layout_constraintTop_toBottomOf="@id/movieTitle"
+            app:layout_constraintEnd_toStartOf="@+id/dateText"
+            app:layout_constraintBottom_toBottomOf="@+id/dateText"
+            android:rating="3.5" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="@dimen/common_zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="@color/gray_tundora"
+            app:layout_constraintEnd_toStartOf="@+id/favouriteImage"
+            app:layout_constraintStart_toEndOf="@+id/ratingBarWidget"
+            app:layout_constraintTop_toBottomOf="@id/movieTitle"
+            android:text="6 March 2018" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

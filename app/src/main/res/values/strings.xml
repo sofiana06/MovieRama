@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MovieRama</string>
+
+    <string name="movie_rama_search">Search MovieRama</string>
+    <string name="movie_rama_loading_more">Loading more</string>
+    <string name="movie_rama_description">DESCRIPTION</string>
+    <string name="movie_rama_director">DIRECTOR</string>
+    <string name="movie_rama_cast">CAST</string>
+    <string name="movie_rama_similar_movies">SIMILAR MOVIES</string>
+    <string name="movie_rama_reviews">REVIEWS</string>
+</resources>
