@@ -26,7 +26,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_launcher_background" />
+            tools:src="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/movieTitle"
@@ -37,10 +37,12 @@
             android:layout_marginBottom="20dp"
             android:textColor="?colorOnBackground"
             android:textSize="@dimen/common_text_twenty_sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@+id/favouriteImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movieImage"
-            android:text="Jurassic World: Fallen Kingdom" />
+            tools:text="Jurassic World: Fallen Kingdom" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/favouriteImage"
@@ -62,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@id/movieTitle"
             app:layout_constraintEnd_toStartOf="@+id/dateText"
             app:layout_constraintBottom_toBottomOf="@+id/dateText"
-            android:rating="3.5" />
+            tools:rating="3.5" />
 
         <TextView
             android:id="@+id/dateText"
@@ -73,6 +75,6 @@
             app:layout_constraintEnd_toStartOf="@+id/favouriteImage"
             app:layout_constraintStart_toEndOf="@+id/ratingBarWidget"
             app:layout_constraintTop_toBottomOf="@id/movieTitle"
-            android:text="6 March 2018" />
+            tools:text="6 March 2018" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

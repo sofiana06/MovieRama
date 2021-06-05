@@ -1,4 +1,4 @@
-package com.skoukio.movierama.ui.activity
+package com.skoukio.movierama.ui.activity.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.skoukio.movierama.R
 import com.skoukio.movierama.common.DefinitionsApi
 import com.skoukio.movierama.common.application.MovieRamaApplication
-import com.skoukio.movierama.mvp.interactor.HomeInteractorImpl
-import com.skoukio.movierama.mvp.presenter.HomePresenter
-import com.skoukio.movierama.mvp.presenter.HomePresenterImpl
-import com.skoukio.movierama.mvp.view.HomeView
-import com.skoukio.movierama.ui.adapter.PopularMoviesRecyclerViewAdapter
+import com.skoukio.movierama.models.data.home.MovieModel
+import com.skoukio.movierama.mvp.interactor.home.HomeInteractorImpl
+import com.skoukio.movierama.mvp.presenter.home.HomePresenter
+import com.skoukio.movierama.mvp.presenter.home.HomePresenterImpl
+import com.skoukio.movierama.mvp.view.home.HomeView
+import com.skoukio.movierama.ui.activity.movieDetails.MovieDetailsActivity
+import com.skoukio.movierama.ui.adapter.home.PopularMoviesRecyclerViewAdapter
 import com.skoukio.movierama.ui.custom.itemDecoration.BottomTopDividerItemDecoration
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -34,6 +36,7 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         )
         initResources()
         initLayout()
+        homePresenter.getPopularMovies()
     }
 
     override fun onDestroy() {
@@ -70,6 +73,10 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
     }
 
     override fun onRefresh() {
-        TODO("Not yet implemented")
+        homePresenter.getPopularMovies()
+    }
+
+    override fun showPopularMovies(popularMovies: List<MovieModel>) {
+        moviesRecyclerViewAdapter.addPopularMoviesList(popularMovies)
     }
 }

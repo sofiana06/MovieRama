@@ -1,4 +1,4 @@
-package com.skoukio.movierama.ui.adapter
+package com.skoukio.movierama.ui.adapter.movieDetails
 
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ class SimilarMoviesRecyclerViewAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SimilarMoviesRecyclerViewAdapter.SimilarMoviesViewHolder {
+    ): SimilarMoviesViewHolder {
         return SimilarMoviesViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.row_similar_movie,
@@ -27,7 +27,7 @@ class SimilarMoviesRecyclerViewAdapter :
     }
 
     override fun onBindViewHolder(
-        holder: SimilarMoviesRecyclerViewAdapter.SimilarMoviesViewHolder,
+        holder: SimilarMoviesViewHolder,
         position: Int
     ) {
         val movie = movieList[position]

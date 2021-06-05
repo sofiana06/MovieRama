@@ -40,7 +40,7 @@ class RetrofitFactory {
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request()
-                val urlBuilder = request.url().newBuilder()
+                val urlBuilder = request.url.newBuilder()
 
                 urlBuilder.addQueryParameter(
                     QUERY_API_KEY,

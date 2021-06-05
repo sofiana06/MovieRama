@@ -1,11 +1,14 @@
-package com.skoukio.movierama.mvp.presenter
+package com.skoukio.movierama.mvp.presenter.movieDetails
 
-import com.skoukio.movierama.mvp.interactor.HomeInteractor
-import com.skoukio.movierama.mvp.view.HomeView
+import com.skoukio.movierama.mvp.interactor.movieDetails.MovieDetailsInteractor
+import com.skoukio.movierama.mvp.view.movieDetails.MovieDetailsView
 import kotlinx.coroutines.*
 import java.lang.ref.WeakReference
 
-class HomePresenterImpl(view: HomeView, private val interactor: HomeInteractor) : HomePresenter {
+class MovieDetailsPresenterImpl(
+    view: MovieDetailsView,
+    private val interactor: MovieDetailsInteractor
+) : MovieDetailsPresenter {
 
     private val viewRef = WeakReference(view)
 
@@ -19,7 +22,7 @@ class HomePresenterImpl(view: HomeView, private val interactor: HomeInteractor) 
         uiScope.coroutineContext.cancelChildren()
     }
 
-    private fun getView(): HomeView? {
+    private fun getView(): MovieDetailsView? {
         return viewRef.get()
     }
 }

@@ -2,23 +2,38 @@ package com.skoukio.movierama.models.data.home
 
 
 import android.os.Parcelable
+import com.skoukio.movierama.common.DefinitionsApi
 import com.skoukio.movierama.models.common.ImageModel
-import com.skoukio.movierama.models.common.Model
-import com.skoukio.movierama.models.common.Model.Companion.INVALID_DOUBLE
-import com.skoukio.movierama.models.common.Model.Companion.INVALID_INT
-import com.skoukio.movierama.models.common.Model.Companion.INVALID_STRING
+import com.skoukio.movierama.network.parsers.response.home.MoviesResponse
+import com.skoukio.movierama.network.parsers.response.home.MoviesResults
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+data class MoviesResponseModel(
+    val page: Int? = null,
+    val results: List<MovieModel>?
+) : Parcelable
+
+@Parcelize
 data class MovieModel(
-    val id: Int = INVALID_INT,
-    val language: String = INVALID_STRING,
-    val title: String = INVALID_STRING,
-    val overview: String = INVALID_STRING,
-    val popularity: Int = INVALID_INT,
-    val image: ImageModel = ImageModel(),
-    val content: String = INVALID_STRING,
-    val releaseDate: String = INVALID_STRING,
-    val averageVotes: Double = INVALID_DOUBLE,
-    val votesCount: Double = INVALID_DOUBLE
-) : Parcelable, Model
+    val title: String? = null,
+    val releaseDate: String? = null,
+    val rating: Double? = null,
+    val poster: ImageModel = ImageModel()
+) : Parcelable
+
+fun MoviesResponse?.toModel(): MoviesResponseModel {
+    return MoviesResponseModel(
+        page = this?.page,
+        results = this?.results?.map { it.toModel() } ?: listOf()
+    )
+}
+
+fun MoviesResults?.toModel(): MovieModel {
+    return MovieModel(
+        title = this?.title,
+        releaseDate = this?.releaseDate,
+        rating = this?.rating,
+        poster = ImageModel(url = DefinitionsApi.DOMAIN_IMAGE + this?.poster ?: "")
+    )
+}

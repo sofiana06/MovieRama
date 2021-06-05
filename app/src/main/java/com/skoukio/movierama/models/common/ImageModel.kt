@@ -2,18 +2,17 @@ package com.skoukio.movierama.models.common
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import com.skoukio.movierama.models.common.Model.Companion.INVALID_INT
 import kotlinx.android.parcel.Parcelize
 import java.io.File
 
 @Parcelize
 data class ImageModel(
     val url: String? = null,
-    @DrawableRes val resource: Int = INVALID_INT,
+    @DrawableRes val resource: Int = -1,
     val path: File? = null
-) : Parcelable, Model
+) : Parcelable
 
-fun String?.nonNullImage(@DrawableRes defaultValue: Int = INVALID_INT): ImageModel {
+fun String?.nonNullImage(@DrawableRes defaultValue: Int = -1): ImageModel {
     if (this == null) {
         return ImageModel(resource = defaultValue)
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MovieDetailsActivity">
+    tools:context=".ui.activity.movieDetails.MovieDetailsActivity">
 
     <ImageView
         android:id="@+id/movieImage"
@@ -26,7 +26,7 @@
         android:textColor="@color/gray_tundora"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieImage"
-        android:text="6 March 2018" />
+        tools:text="6 March 2018" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/favouriteImage"
@@ -83,7 +83,7 @@
                 android:layout_marginBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieDescription"
-                android:text="When the island's dormant volcano begins roaring to life, Owen and Claire mount a campaign to rescue the remaining dinosaurs from this extinction-level event" />
+                tools:text="When the island's dormant volcano begins roaring to life, Owen and Claire mount a campaign to rescue the remaining dinosaurs from this extinction-level event" />
 
             <TextView
                 android:id="@+id/movieDirector"
@@ -105,7 +105,7 @@
                 android:layout_marginBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieDirector"
-                android:text="J.A. Bayona" />
+                tools:text="J.A. Bayona" />
 
             <TextView
                 android:id="@+id/movieCast"
@@ -126,7 +126,7 @@
                 android:textColor="?colorOnBackground"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieCast"
-                android:text="Chris Pratt, Bryce Dallas Howard, Rafe Spall" />
+                tools:text="Chris Pratt, Bryce Dallas Howard, Rafe Spall" />
 
             <TextView
                 android:id="@+id/similarMoviesTitle"
