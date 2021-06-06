@@ -9,11 +9,13 @@ class HomePresenterImpl(view: HomeView, private val interactor: HomeInteractor) 
 
     private val viewRef = WeakReference(view)
 
-    private var uiDispatcher: CoroutineDispatcher = Dispatchers.Main
     private var bgDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     private var job = SupervisorJob()
     private var uiScope = CoroutineScope(Dispatchers.Main + job)
+
+    private var pageIndex: Int = 0
+    private var isFetching: Boolean = false
 
     override fun detach() {
         uiScope.coroutineContext.cancelChildren()
@@ -21,19 +23,45 @@ class HomePresenterImpl(view: HomeView, private val interactor: HomeInteractor) 
 
     override fun getPopularMovies() {
         uiScope.launch {
-            val popularMoviesDataResult = interactor.getPopularMovies(1)
-            val popularMoviesData= popularMoviesDataResult.data?.results
+            if (isFetching()) {
+                return@launch
+            }
+            setFetching(true)
+            pageIndex++
+            if (pageIndex == 0) {
+                getView()?.showLoading()
+            } else {
+                getView()?.showFetching()
+            }
+            val popularMoviesDataResult =
+                withContext(bgDispatcher) { interactor.getPopularMovies(pageIndex) }
+            val popularMoviesData = popularMoviesDataResult.data?.results
             if (popularMoviesData != null) {
                 getView()?.showPopularMovies(popularMoviesData)
+            } else {
+                getView()?.showPopularMovies(emptyList())
+                getView()?.showError()
             }
+            setFetching(false)
         }
     }
 
     override fun resetPagination() {
-        TODO("Not yet implemented")
+        pageIndex = 0
+        setFetching(false)
     }
 
     private fun getView(): HomeView? {
         return viewRef.get()
+    }
+
+    @Synchronized
+    private fun setFetching(isFetching: Boolean) {
+        this.isFetching = isFetching
+    }
+
+    @Synchronized
+    private fun isFetching(): Boolean {
+        return this.isFetching
     }
 }

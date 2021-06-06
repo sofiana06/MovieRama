@@ -48,10 +48,4 @@
             tools:itemCount="5"
             tools:listitem="@layout/row_movie" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <include
-        layout="@layout/layout_loading"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

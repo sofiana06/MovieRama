@@ -13,34 +13,71 @@ import kotlinx.android.synthetic.main.row_movie.*
 
 class PopularMoviesRecyclerViewAdapter
     (private val movieClicked: (MovieModel) -> Unit) :
-    RecyclerView.Adapter<PopularMoviesRecyclerViewAdapter.PopularMoviesViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var movieList: List<MovieModel> = listOf()
+    private val movieList: MutableList<MovieModel> = mutableListOf()
+    private var isFetching: Boolean = false
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMoviesViewHolder {
-        return PopularMoviesViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.row_movie,
-                parent,
-                false
-            )
-        )
+    companion object {
+        const val ROW_ITEM = 0
+        const val ROW_LOADING = 1
     }
 
-    override fun onBindViewHolder(holder: PopularMoviesViewHolder, position: Int) {
-        val movie = movieList[position]
-        holder.bind(movie)
-        holder.itemView.setOnClickListener {
-            movieClicked.invoke(movie)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == ROW_ITEM) {
+            return PopularMoviesViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.row_movie,
+                    parent,
+                    false
+                )
+            )
+        } else {
+            return MoviesLoadingViewHolder(
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.row_loading,
+                    parent,
+                    false
+                )
+            )
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is PopularMoviesViewHolder) {
+            val movie = movieList[position]
+            holder.bind(movie)
+            holder.itemView.setOnClickListener {
+                movieClicked.invoke(movie)
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        return if (isFetching) movieList.size + 1 else movieList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (isFetching && position == itemCount - 1) {
+            return ROW_LOADING
+        }
+        return ROW_ITEM
+    }
+
+    fun clearData() {
+        movieList.clear()
+        this.isFetching = false
+        notifyDataSetChanged()
     }
 
     fun addPopularMoviesList(popularMovies: List<MovieModel>) {
-        movieList = popularMovies
+        movieList.addAll(popularMovies)
+        this.isFetching = false
+        notifyDataSetChanged()
+    }
+
+    fun setFetching(isFetching: Boolean) {
+        this.isFetching = isFetching
         notifyDataSetChanged()
     }
 
@@ -56,4 +93,8 @@ class PopularMoviesRecyclerViewAdapter
             }
         }
     }
+
+    class MoviesLoadingViewHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView),
+        LayoutContainer {}
 }

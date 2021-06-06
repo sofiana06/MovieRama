@@ -2,6 +2,7 @@ package com.skoukio.movierama.ui.activity.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +18,18 @@ import com.skoukio.movierama.mvp.view.home.HomeView
 import com.skoukio.movierama.ui.activity.movieDetails.MovieDetailsActivity
 import com.skoukio.movierama.ui.adapter.home.PopularMoviesRecyclerViewAdapter
 import com.skoukio.movierama.ui.custom.itemDecoration.BottomTopDividerItemDecoration
+import com.skoukio.movierama.ui.custom.pagination.PaginationScrollListener
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, HomeView {
 
     private lateinit var moviesRecyclerViewAdapter: PopularMoviesRecyclerViewAdapter
     private lateinit var homePresenter: HomePresenter
+    private var paginationScrollListener: PaginationScrollListener? = null
+
+    companion object {
+        private const val PAGINATION_SIZE = 20
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +41,6 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
                 networkProvider = MovieRamaApplication.get().networkProvider
             )
         )
-        initResources()
         initLayout()
         homePresenter.getPopularMovies()
     }
@@ -44,7 +50,6 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         homePresenter.detach()
     }
 
-    private fun initResources() {}
     private fun initLayout() {
         moviesRecyclerViewAdapter = PopularMoviesRecyclerViewAdapter { movie ->
             val movieDetailsIntent = Intent(this, MovieDetailsActivity::class.java)
@@ -52,8 +57,8 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
             startActivity(movieDetailsIntent)
             overridePendingTransition(R.anim.animation_slide_in_right, R.anim.animation_zoom_out)
         }
-        moviesRecyclerView?.layoutManager = LinearLayoutManager(this)
-        moviesRecyclerView?.adapter = moviesRecyclerViewAdapter
+        val layoutManager = LinearLayoutManager(this)
+        moviesRecyclerView?.layoutManager = layoutManager
         val topBottomMargin =
             resources?.getDimensionPixelSize(R.dimen.common_ten_dp) ?: 0
         val betweenMargin =
@@ -69,13 +74,40 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
             )
         )
         moviesSwipeRefreshLayout.setOnRefreshListener(this)
+
+        paginationScrollListener = PaginationScrollListener(
+            layoutManager, {
+                homePresenter.getPopularMovies()
+            },
+            PAGINATION_SIZE
+        )
+        paginationScrollListener?.let { paginationScrollListener ->
+            moviesRecyclerView?.addOnScrollListener(paginationScrollListener)
+        }
+
+        moviesRecyclerView?.adapter = moviesRecyclerViewAdapter
     }
 
     override fun onRefresh() {
+        moviesRecyclerViewAdapter.clearData()
+        homePresenter.resetPagination()
         homePresenter.getPopularMovies()
     }
 
     override fun showPopularMovies(popularMovies: List<MovieModel>) {
         moviesRecyclerViewAdapter.addPopularMoviesList(popularMovies)
+        moviesSwipeRefreshLayout?.isRefreshing = false
+    }
+
+    override fun showLoading() {
+        moviesSwipeRefreshLayout?.isRefreshing = true
+    }
+
+    override fun showFetching() {
+        moviesRecyclerViewAdapter.setFetching(true)
+    }
+
+    override fun showError() {
+        Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
     }
 }
