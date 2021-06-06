@@ -58,7 +58,6 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
             resources?.getDimensionPixelSize(R.dimen.common_ten_dp) ?: 0
         val betweenMargin =
             resources?.getDimensionPixelSize(R.dimen.common_ten_dp) ?: 0
-        moviesRecyclerView?.layoutManager = LinearLayoutManager(this)
         moviesRecyclerView?.itemAnimator = null
         moviesRecyclerView?.addItemDecoration(
             BottomTopDividerItemDecoration(

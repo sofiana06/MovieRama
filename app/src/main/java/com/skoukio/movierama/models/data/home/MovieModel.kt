@@ -16,10 +16,12 @@ data class MoviesResponseModel(
 
 @Parcelize
 data class MovieModel(
+    val id: Int? = null,
     val title: String? = null,
     val releaseDate: String? = null,
     val rating: Double? = null,
-    val poster: ImageModel = ImageModel()
+    val poster: ImageModel = ImageModel(),
+    val overview: String? = null
 ) : Parcelable
 
 fun MoviesResponse?.toModel(): MoviesResponseModel {
@@ -31,9 +33,11 @@ fun MoviesResponse?.toModel(): MoviesResponseModel {
 
 fun MoviesResults?.toModel(): MovieModel {
     return MovieModel(
+        id = this?.id,
         title = this?.title,
         releaseDate = this?.releaseDate,
         rating = this?.rating,
-        poster = ImageModel(url = DefinitionsApi.DOMAIN_IMAGE + this?.poster ?: "")
+        poster = ImageModel(url = DefinitionsApi.DOMAIN_IMAGE + this?.poster ?: ""),
+        overview = this?.overview
     )
 }

@@ -6,6 +6,7 @@ import com.skoukio.movierama.network.parsers.response.movieDetails.MovieReviewsR
 import com.skoukio.movierama.network.parsers.response.movieDetails.SimilarMoviesResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieRamaApi {
@@ -20,18 +21,19 @@ interface MovieRamaApi {
         @Query("query") query: String
     ): Deferred<MoviesResponse>
 
-    @GET("movie/{movieId}/reviews")
+    @GET("movie/{movie_id}/reviews")
     fun getMoviesReviewsAsync(
-        @Query("movie_id") movieId: Int
+        @Path("movie_id") movieId: Int
     ): Deferred<MovieReviewsResponse>
 
-    @GET("movie/{movieId}/similar")
+    @GET("movie/{movie_id}/similar")
     fun getSimilarMoviesAsync(
-        @Query("movie_id") movieId: Int
+        @Path("movie_id") movieId: Int
     ): Deferred<SimilarMoviesResponse>
 
-    @GET("movie/{movieId}/credits")
+    @GET("movie/{movie_id}")
     fun getMovieCreditsAsync(
-        @Query("movie_id") movieId: Int
+        @Path("movie_id") movieId: Int,
+        @Query("append_to_response") appendToResponse: String
     ): Deferred<MovieCreditsResponse>
 }

@@ -7,6 +7,6 @@ data class SimilarMoviesResults (
     var id: Int? = null,
     @SerializedName("original_title")
     var title: String? = null,
-    @SerializedName("backdrop_path")
+    @SerializedName("poster_path")
     var poster: String? = null
 )

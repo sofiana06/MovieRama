@@ -2,7 +2,10 @@ package com.skoukio.movierama.network.parsers.response.movieDetails
 
 import com.google.gson.annotations.SerializedName
 
-data class Cast(
+data class Crew (
     @SerializedName("name")
-    val name: String? = null
+    val name: String? = null,
+
+    @SerializedName("job")
+    val job: String? = null
 )

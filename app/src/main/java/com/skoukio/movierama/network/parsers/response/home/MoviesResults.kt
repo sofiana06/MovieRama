@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.skoukio.movierama.models.common.ImageModel
 
 data class MoviesResults(
+    @SerializedName("id")
+    var id: Int? = null,
     @SerializedName("original_title")
     var title: String? = null,
     @SerializedName("release_date")
@@ -11,5 +13,7 @@ data class MoviesResults(
     @SerializedName("vote_average")
     var rating: Double? = null,
     @SerializedName("backdrop_path")
-    var poster: String? = null
+    var poster: String? = null,
+    @SerializedName("overview")
+    var overview: String? = null
 )

@@ -30,6 +30,6 @@ class MovieRamaClient : NetworkProvider {
     }
 
     override fun getMovieCreditsAsync(movieId: Int): Deferred<MovieCreditsResponse> {
-        return movieRamaApi.getMovieCreditsAsync(movieId)
+        return movieRamaApi.getMovieCreditsAsync(movieId, "credits")
     }
 }

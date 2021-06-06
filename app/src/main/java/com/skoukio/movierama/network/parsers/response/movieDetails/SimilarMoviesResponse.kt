@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class SimilarMoviesResponse (
     @SerializedName("page") var page: Int = 0,
-    @SerializedName("results") var results: SimilarMoviesResults
+    @SerializedName("results") var results: List<SimilarMoviesResults>
 )

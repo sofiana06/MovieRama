@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.movieDetails.MovieDetailsActivity">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/movieImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_two_hundred_dp"
@@ -16,6 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_launcher_background" />
+
+    <View
+        android:layout_width="@dimen/common_zero_dp"
+        android:layout_height="@dimen/common_zero_dp"
+        android:background="@drawable/drawable_gradient_black"
+        app:layout_constraintBottom_toBottomOf="@id/movieImage"
+        app:layout_constraintEnd_toEndOf="@id/movieImage"
+        app:layout_constraintStart_toStartOf="@id/movieImage"
+        app:layout_constraintTop_toTopOf="@+id/movieImage" />
 
     <TextView
         android:id="@+id/movieTitle"
@@ -42,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/movieImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="6 March 2018" />
+        tools:text="Action, Adventure, Sci-fi" />
 
     <TextView
         android:id="@+id/dateTitle"
@@ -71,6 +80,7 @@
         style="@style/RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/common_ten_dp"
         android:rating="3.5"
         app:layout_constraintStart_toStartOf="@+id/dateTitle"
         app:layout_constraintTop_toBottomOf="@id/dateTitle" />
@@ -79,6 +89,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/transparent"
         android:clipToPadding="false"
         android:paddingVertical="@dimen/common_twenty_dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,10 +99,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/movieDescription"
+                android:id="@+id/movieDescriptionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/common_twenty_dp"
@@ -102,14 +114,14 @@
                 app:layout_constraintTop_toBottomOf="@id/ratingBarWidget" />
 
             <TextView
-                android:id="@+id/character_comics_title"
+                android:id="@+id/movieDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="@dimen/common_twenty_dp"
                 android:textColor="@color/blue_cloud_burst"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movieDescription"
+                app:layout_constraintTop_toBottomOf="@id/movieDescriptionTitle"
                 tools:text="When the island's dormant volcano begins roaring to life, Owen and Claire mount a campaign to rescue the remaining dinosaurs from this extinction-level event" />
 
             <TextView
@@ -121,7 +133,7 @@
                 android:text="@string/movie_rama_director"
                 android:textColor="@color/blue_chambray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_comics_title" />
+                app:layout_constraintTop_toBottomOf="@id/movieDescription" />
 
             <TextView
                 android:id="@+id/movieDirectorName"
@@ -176,7 +188,7 @@
                 android:paddingHorizontal="@dimen/common_twenty_dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_comics_title"
+                app:layout_constraintTop_toBottomOf="@id/movieCastNames"
                 tools:itemCount="5"
                 tools:listitem="@layout/row_similar_movie" />
 

@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class MovieReviewsResponseModel(
     val id: Long? = null,
     val page: Int? = null,
-    val results: MovieReviewsModel
+    val results: List<MovieReviewsModel>
 ) : Parcelable
 
 @Parcelize
@@ -22,7 +22,7 @@ fun MovieReviewsResponse?.toModel(): MovieReviewsResponseModel {
     return MovieReviewsResponseModel(
         id = this?.id,
         page = this?.page,
-        results = this?.results.toModel()
+        results = this?.results?.map { it.toModel() } ?: listOf()
     )
 }
 
