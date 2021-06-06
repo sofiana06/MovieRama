@@ -19,14 +19,13 @@ import com.skoukio.movierama.ui.adapter.movieDetails.MovieReviewsRecyclerViewAda
 import com.skoukio.movierama.ui.adapter.movieDetails.SimilarMoviesRecyclerViewAdapter
 import com.skoukio.movierama.ui.custom.itemDecoration.BottomTopDividerItemDecoration
 import kotlinx.android.synthetic.main.activity_movie_details.*
-import kotlinx.android.synthetic.main.activity_movie_details.movieImage
-import kotlinx.android.synthetic.main.activity_movie_details.movieTitle
 
 class MovieDetailsActivity : AppCompatActivity(), MovieDetailsView {
 
     private lateinit var similarMoviesRecyclerViewAdapter: SimilarMoviesRecyclerViewAdapter
     private lateinit var movieReviewsRecyclerViewAdapter: MovieReviewsRecyclerViewAdapter
     private lateinit var movieDetailsPresenter: MovieDetailsPresenter
+    private var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,8 @@ class MovieDetailsActivity : AppCompatActivity(), MovieDetailsView {
         movieDetailsPresenter = MovieDetailsPresenterImpl(
             view = this,
             interactor = MovieDetailsInteractorImpl(
-                networkProvider = MovieRamaApplication.get().networkProvider
+                networkProvider = MovieRamaApplication.get().networkProvider,
+                sharedPreferencesProvider = MovieRamaApplication.get().sharedPreferencesProvider
             )
         )
         initResources()
@@ -44,6 +44,7 @@ class MovieDetailsActivity : AppCompatActivity(), MovieDetailsView {
 
     private fun initResources() {
         val movieDetails = intent?.extras?.getParcelable<MovieModel>(DefinitionsApi.BUNDLE.MOVIE)
+        isFavorite = movieDetails?.isFavorite == true
         movieDetailsPresenter.getMovieCredits(movieDetails?.id ?: -1)
         movieDetailsPresenter.getMovieReviews(movieDetails?.id ?: -1)
         movieDetailsPresenter.getSimilarMovies(movieDetails?.id ?: -1)
@@ -52,6 +53,14 @@ class MovieDetailsActivity : AppCompatActivity(), MovieDetailsView {
         dateTitle?.text = movieDetails?.releaseDate?.getFormattedDate()
         ratingBarWidget?.rating = (movieDetails?.rating?.toFloat() ?: 0f) * 5 / 10
         movieDescription?.text = movieDetails?.overview
+        favouriteImage?.setImageResource(if (isFavorite) R.drawable.ic_icon_favorite else R.drawable.ic_icon_unfavorite)
+        favouriteImage?.setOnClickListener {
+            movieDetails?.let {
+                isFavorite = !isFavorite
+                favouriteImage?.setImageResource(if (isFavorite) R.drawable.ic_icon_favorite else R.drawable.ic_icon_unfavorite)
+                movieDetailsPresenter.toggleFavorite(it)
+            }
+        }
     }
 
     private fun initLayout() {

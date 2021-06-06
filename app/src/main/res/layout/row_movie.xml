@@ -35,10 +35,10 @@
             android:layout_marginHorizontal="@dimen/common_twenty_dp"
             android:layout_marginTop="@dimen/common_ten_dp"
             android:layout_marginBottom="@dimen/common_twenty_dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/blue_cloud_burst"
             android:textSize="@dimen/common_text_twenty_sp"
-            android:maxLines="1"
-            android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@+id/favouriteImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movieImage"
@@ -50,20 +50,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_four_dp"
             android:layout_marginEnd="@dimen/common_twenty_dp"
-            android:background="@drawable/ic_icon_favorite"
+            android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="@+id/dateText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/movieTitle" />
+            app:layout_constraintTop_toTopOf="@+id/movieTitle"
+            tools:src="@drawable/ic_icon_favorite" />
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/ratingBarWidget"
             style="@style/RatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/dateText"
+            app:layout_constraintEnd_toStartOf="@+id/dateText"
             app:layout_constraintStart_toStartOf="@+id/movieTitle"
             app:layout_constraintTop_toBottomOf="@id/movieTitle"
-            app:layout_constraintEnd_toStartOf="@+id/dateText"
-            app:layout_constraintBottom_toBottomOf="@+id/dateText"
             tools:rating="3.5" />
 
         <TextView

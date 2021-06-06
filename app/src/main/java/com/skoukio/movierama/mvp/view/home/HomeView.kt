@@ -7,4 +7,5 @@ interface HomeView {
     fun showLoading()
     fun showFetching()
     fun showError()
+    fun clearPreviousMovies()
 }

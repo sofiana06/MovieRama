@@ -11,8 +11,10 @@ import com.skoukio.movierama.models.data.home.MovieModel
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.row_movie.*
 
-class PopularMoviesRecyclerViewAdapter
-    (private val movieClicked: (MovieModel) -> Unit) :
+class PopularMoviesRecyclerViewAdapter(
+    private val movieClicked: (MovieModel) -> Unit,
+    private val onFavoriteClicked: (MovieModel) -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val movieList: MutableList<MovieModel> = mutableListOf()
@@ -81,7 +83,7 @@ class PopularMoviesRecyclerViewAdapter
         notifyDataSetChanged()
     }
 
-    class PopularMoviesViewHolder(override val containerView: View) :
+    inner class PopularMoviesViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
         LayoutContainer {
         fun bind(movie: MovieModel) {
@@ -89,7 +91,13 @@ class PopularMoviesRecyclerViewAdapter
             movieTitle?.text = movie.title
             dateText?.text = movie.releaseDate?.getFormattedDate()
             ratingBarWidget?.rating = (movie.rating?.toFloat() ?: 0f) * 5 / 10
+            favouriteImage.setImageResource(if (movie.isFavorite) R.drawable.ic_icon_favorite else R.drawable.ic_icon_unfavorite)
             favouriteImage.setOnClickListener {
+                onFavoriteClicked(movie)
+                val index = movieList.indexOf(movie)
+                movieList.removeAt(index)
+                movieList.add(index, movie.copy(isFavorite = !movie.isFavorite))
+                notifyItemChanged(index)
             }
         }
     }

@@ -1,14 +1,19 @@
 package com.skoukio.movierama.mvp.interactor.movieDetails
 
 import com.skoukio.movierama.models.common.DataResult
+import com.skoukio.movierama.models.data.home.MovieModel
 import com.skoukio.movierama.models.data.movieDetails.MovieCreditsModel
 import com.skoukio.movierama.models.data.movieDetails.MovieReviewsResponseModel
 import com.skoukio.movierama.models.data.movieDetails.SimilarMoviesResponseModel
 import com.skoukio.movierama.models.data.movieDetails.toModel
 import com.skoukio.movierama.network.providers.NetworkProvider
+import com.skoukio.movierama.network.providers.sharedPreferences.SharedPreferencesProvider
 import timber.log.Timber
 
-class MovieDetailsInteractorImpl(private val networkProvider: NetworkProvider) :
+class MovieDetailsInteractorImpl(
+    private val networkProvider: NetworkProvider,
+    private val sharedPreferencesProvider: SharedPreferencesProvider
+) :
     MovieDetailsInteractor {
 
     override suspend fun getMovieReviews(movieId: Int): DataResult<MovieReviewsResponseModel> {
@@ -39,5 +44,15 @@ class MovieDetailsInteractorImpl(private val networkProvider: NetworkProvider) :
             Timber.d(t)
             DataResult(throwable = t)
         }
+    }
+
+    override fun toggleFavorite(movie: MovieModel) {
+        if (movie.id == null) {
+            return
+        }
+        sharedPreferencesProvider.setFavoriteMovie(
+            movieId = movie.id,
+            isFavorite = !movie.isFavorite
+        )
     }
 }

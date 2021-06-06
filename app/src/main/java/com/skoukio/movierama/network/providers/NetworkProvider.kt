@@ -8,7 +8,7 @@ import kotlinx.coroutines.Deferred
 
 interface NetworkProvider {
     fun getPopularMoviesAsync(page: Int): Deferred<MoviesResponse>
-    fun getSearchResultsMoviesAsync(query: String): Deferred<MoviesResponse>
+    fun getSearchResultsMoviesAsync(query: String, page: Int): Deferred<MoviesResponse>
     fun getMoviesReviewsAsync(movieId: Int): Deferred<MovieReviewsResponse>
     fun getSimilarMoviesAsync(movieId: Int): Deferred<SimilarMoviesResponse>
     fun getMovieCreditsAsync(movieId: Int): Deferred<MovieCreditsResponse>

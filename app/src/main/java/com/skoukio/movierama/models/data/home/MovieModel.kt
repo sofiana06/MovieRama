@@ -21,7 +21,8 @@ data class MovieModel(
     val releaseDate: String? = null,
     val rating: Double? = null,
     val poster: ImageModel = ImageModel(),
-    val overview: String? = null
+    val overview: String? = null,
+    val isFavorite: Boolean = false
 ) : Parcelable
 
 fun MoviesResponse?.toModel(): MoviesResponseModel {

@@ -4,6 +4,7 @@ import android.app.Application
 import com.skoukio.movierama.network.api.MovieRamaClient
 import com.skoukio.movierama.network.providers.NetworkProvider
 import com.skoukio.movierama.network.providers.sharedPreferences.SharedPreferencesProvider
+import com.skoukio.movierama.network.providers.sharedPreferences.SharedPreferencesProviderImpl
 import timber.log.Timber
 
 class MovieRamaApplication : Application() {
@@ -22,7 +23,7 @@ class MovieRamaApplication : Application() {
     }
 
     val sharedPreferencesProvider: SharedPreferencesProvider by lazy {
-        return@lazy SharedPreferencesProvider(this)
+        return@lazy SharedPreferencesProviderImpl(this)
     }
 
     override fun onCreate() {

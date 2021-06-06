@@ -17,8 +17,8 @@ class MovieRamaClient : NetworkProvider {
         return movieRamaApi.getPopularMoviesAsync(page)
     }
 
-    override fun getSearchResultsMoviesAsync(query: String): Deferred<MoviesResponse> {
-        return movieRamaApi.getSearchResultsMoviesAsync(query)
+    override fun getSearchResultsMoviesAsync(query: String, page: Int): Deferred<MoviesResponse> {
+        return movieRamaApi.getSearchResultsMoviesAsync(query, page)
     }
 
     override fun getMoviesReviewsAsync(movieId: Int): Deferred<MovieReviewsResponse> {

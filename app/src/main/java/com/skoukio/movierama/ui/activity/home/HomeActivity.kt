@@ -2,6 +2,7 @@ package com.skoukio.movierama.ui.activity.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -38,10 +39,12 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         homePresenter = HomePresenterImpl(
             view = this,
             interactor = HomeInteractorImpl(
-                networkProvider = MovieRamaApplication.get().networkProvider
+                networkProvider = MovieRamaApplication.get().networkProvider,
+                sharedPreferencesProvider = MovieRamaApplication.get().sharedPreferencesProvider
             )
         )
         initLayout()
+        initSearchView()
         homePresenter.getPopularMovies()
     }
 
@@ -51,12 +54,19 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
     }
 
     private fun initLayout() {
-        moviesRecyclerViewAdapter = PopularMoviesRecyclerViewAdapter { movie ->
-            val movieDetailsIntent = Intent(this, MovieDetailsActivity::class.java)
-            movieDetailsIntent.putExtra(DefinitionsApi.BUNDLE.MOVIE, movie)
-            startActivity(movieDetailsIntent)
-            overridePendingTransition(R.anim.animation_slide_in_right, R.anim.animation_zoom_out)
-        }
+        moviesRecyclerViewAdapter = PopularMoviesRecyclerViewAdapter(
+            movieClicked = { movie ->
+                val movieDetailsIntent = Intent(this, MovieDetailsActivity::class.java)
+                movieDetailsIntent.putExtra(DefinitionsApi.BUNDLE.MOVIE, movie)
+                startActivity(movieDetailsIntent)
+                overridePendingTransition(
+                    R.anim.animation_slide_in_right,
+                    R.anim.animation_zoom_out
+                )
+            },
+            onFavoriteClicked = { movie ->
+                homePresenter.toggleFavorite(movie)
+            })
         val layoutManager = LinearLayoutManager(this)
         moviesRecyclerView?.layoutManager = layoutManager
         val topBottomMargin =
@@ -88,6 +98,26 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         moviesRecyclerView?.adapter = moviesRecyclerViewAdapter
     }
 
+    private fun initSearchView() {
+        movieSearchView?.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                homePresenter.filterMovies(query ?: "")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
+        movieSearchView?.findViewById<View>(androidx.appcompat.R.id.search_close_btn)
+            ?.setOnClickListener {
+                homePresenter.filterMovies(null)
+                movieSearchView?.setQuery(null, true)
+            }
+    }
+
     override fun onRefresh() {
         moviesRecyclerViewAdapter.clearData()
         homePresenter.resetPagination()
@@ -109,5 +139,9 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
 
     override fun showError() {
         Toast.makeText(this, "Something went wrong...", Toast.LENGTH_LONG).show()
+    }
+
+    override fun clearPreviousMovies() {
+        moviesRecyclerViewAdapter.clearData()
     }
 }

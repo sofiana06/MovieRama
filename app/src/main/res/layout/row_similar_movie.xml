@@ -2,12 +2,12 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="126dp"
-    android:layout_height="192dp"
-    android:layout_marginEnd="17dp"
+    android:layout_width="@dimen/common_one_hundred_twenty_six_dp"
+    android:layout_height="@dimen/common_one_hundred_ninety_two_dp"
+    android:layout_marginEnd="@dimen/common_sixteen_dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="@dimen/common_eight_dp"
     app:cardElevation="0dp">
 
     <FrameLayout
@@ -16,8 +16,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/holderImage"
-            android:layout_width="126dp"
-            android:layout_height="192dp"
+            android:layout_width="@dimen/common_one_hundred_twenty_six_dp"
+            android:layout_height="@dimen/common_one_hundred_ninety_two_dp"
             android:adjustViewBounds="true"
             android:background="@color/transparent"
             android:importantForAccessibility="no"

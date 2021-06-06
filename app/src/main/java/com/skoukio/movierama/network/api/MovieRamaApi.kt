@@ -18,7 +18,8 @@ interface MovieRamaApi {
 
     @GET("search/movie")
     fun getSearchResultsMoviesAsync(
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("page") page: Int
     ): Deferred<MoviesResponse>
 
     @GET("movie/{movie_id}/reviews")

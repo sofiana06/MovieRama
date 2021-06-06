@@ -1,5 +1,6 @@
 package com.skoukio.movierama.mvp.presenter.movieDetails
 
+import com.skoukio.movierama.models.data.home.MovieModel
 import com.skoukio.movierama.mvp.interactor.movieDetails.MovieDetailsInteractor
 import com.skoukio.movierama.mvp.view.movieDetails.MovieDetailsView
 import kotlinx.coroutines.*
@@ -12,7 +13,6 @@ class MovieDetailsPresenterImpl(
 
     private val viewRef = WeakReference(view)
 
-    private var uiDispatcher: CoroutineDispatcher = Dispatchers.Main
     private var bgDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     private var job = SupervisorJob()
@@ -24,7 +24,8 @@ class MovieDetailsPresenterImpl(
 
     override fun getMovieCredits(movieId: Int) {
         uiScope.launch {
-            val movieCreditsDataResult = interactor.getMovieCredits(movieId)
+            val movieCreditsDataResult =
+                withContext(bgDispatcher) { interactor.getMovieCredits(movieId) }
             val movieCastData = movieCreditsDataResult.data
             if (movieCastData != null) {
                 getView()?.showMovieCast(movieCastData)
@@ -34,7 +35,8 @@ class MovieDetailsPresenterImpl(
 
     override fun getSimilarMovies(movieId: Int) {
         uiScope.launch {
-            val similarMoviesDataResult = interactor.getSimilarMovies(movieId)
+            val similarMoviesDataResult =
+                withContext(bgDispatcher) { interactor.getSimilarMovies(movieId) }
             val similarMoviesData = similarMoviesDataResult.data?.results
             if (similarMoviesData != null) {
                 getView()?.showSimilarMoviesData(similarMoviesData)
@@ -44,12 +46,17 @@ class MovieDetailsPresenterImpl(
 
     override fun getMovieReviews(movieId: Int) {
         uiScope.launch {
-            val movieReviewsDataResult = interactor.getMovieReviews(movieId)
+            val movieReviewsDataResult =
+                withContext(bgDispatcher) { interactor.getMovieReviews(movieId) }
             val movieReviewsData = movieReviewsDataResult.data?.results
             if (movieReviewsData != null) {
                 getView()?.showMovieReviewsData(movieReviewsData)
             }
         }
+    }
+
+    override fun toggleFavorite(movie: MovieModel) {
+        interactor.toggleFavorite(movie)
     }
 
     private fun getView(): MovieDetailsView? {

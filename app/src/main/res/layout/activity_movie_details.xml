@@ -70,10 +70,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_four_dp"
         android:layout_marginEnd="@dimen/common_twenty_dp"
-        android:background="@drawable/ic_icon_favorite"
+        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBarWidget"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dateTitle" />
+        app:layout_constraintTop_toTopOf="@+id/dateTitle"
+        tools:src="@drawable/ic_icon_unfavorite" />
 
     <androidx.appcompat.widget.AppCompatRatingBar
         android:id="@+id/ratingBarWidget"
@@ -117,7 +118,7 @@
                 android:id="@+id/movieDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginBottom="@dimen/common_twenty_dp"
                 android:textColor="@color/blue_cloud_burst"
                 app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +129,7 @@
                 android:id="@+id/movieDirector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginBottom="@dimen/common_ten_dp"
                 android:text="@string/movie_rama_director"
                 android:textColor="@color/blue_chambray"
@@ -150,7 +151,7 @@
                 android:id="@+id/movieCast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginBottom="@dimen/common_ten_dp"
                 android:text="@string/movie_rama_cast"
                 android:textColor="@color/blue_chambray"
