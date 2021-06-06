@@ -11,5 +11,6 @@ object DefinitionsApi {
 
     object BUNDLE {
         const val MOVIE = "movie_details"
+        const val MOVIE_REQUEST = 100
     }
 }

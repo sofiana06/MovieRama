@@ -39,6 +39,7 @@
             android:maxLines="1"
             android:textColor="@color/blue_cloud_burst"
             android:textSize="@dimen/common_text_twenty_sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/favouriteImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movieImage"

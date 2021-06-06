@@ -1,5 +1,6 @@
 package com.skoukio.movierama.ui.activity.home
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.skoukio.movierama.R
 import com.skoukio.movierama.common.DefinitionsApi
+import com.skoukio.movierama.common.DefinitionsApi.BUNDLE.MOVIE_REQUEST
 import com.skoukio.movierama.common.application.MovieRamaApplication
 import com.skoukio.movierama.models.data.home.MovieModel
 import com.skoukio.movierama.mvp.interactor.home.HomeInteractorImpl
@@ -58,7 +60,7 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
             movieClicked = { movie ->
                 val movieDetailsIntent = Intent(this, MovieDetailsActivity::class.java)
                 movieDetailsIntent.putExtra(DefinitionsApi.BUNDLE.MOVIE, movie)
-                startActivity(movieDetailsIntent)
+                startActivityForResult(movieDetailsIntent, MOVIE_REQUEST)
                 overridePendingTransition(
                     R.anim.animation_slide_in_right,
                     R.anim.animation_zoom_out
@@ -96,6 +98,14 @@ class HomeActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         }
 
         moviesRecyclerView?.adapter = moviesRecyclerViewAdapter
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val movie = data?.getParcelableExtra<MovieModel>(DefinitionsApi.BUNDLE.MOVIE) ?: return
+            moviesRecyclerViewAdapter.refreshItem(movie)
+        }
     }
 
     private fun initSearchView() {

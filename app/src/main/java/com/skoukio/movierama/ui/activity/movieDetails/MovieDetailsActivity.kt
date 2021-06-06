@@ -1,5 +1,7 @@
 package com.skoukio.movierama.ui.activity.movieDetails
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -63,10 +65,24 @@ class MovieDetailsActivity : AppCompatActivity(), MovieDetailsView {
         }
     }
 
+    private fun close() {
+        val movieDetails = intent?.extras?.getParcelable<MovieModel>(DefinitionsApi.BUNDLE.MOVIE)
+            ?.copy(isFavorite = isFavorite)
+        val resultIntent = Intent()
+        if (movieDetails != null) {
+            resultIntent.putExtra(DefinitionsApi.BUNDLE.MOVIE, movieDetails)
+        }
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        close()
+    }
+
     private fun initLayout() {
         backButtonImageView?.setOnClickListener {
-            onBackPressed()
-            finish()
+            close()
         }
         val topBottomMargin =
             resources?.getDimensionPixelSize(R.dimen.common_ten_dp) ?: 0

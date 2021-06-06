@@ -36,6 +36,7 @@
         android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="@dimen/common_text_twenty_sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/genreText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
         android:layout_height="0dp"
         android:background="@color/transparent"
         android:clipToPadding="false"
-        android:paddingVertical="@dimen/common_twenty_dp"
+        android:paddingVertical="@dimen/common_sixteen_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ratingBarWidget">
@@ -108,9 +109,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/common_twenty_dp"
-                android:layout_marginBottom="@dimen/common_twenty_dp"
+                android:layout_marginBottom="@dimen/common_ten_dp"
                 android:text="@string/movie_rama_description"
-                android:textColor="@color/blue_chambray"
+                android:textColor="@color/blue_whale"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ratingBarWidget" />
 
@@ -132,7 +134,8 @@
                 android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginBottom="@dimen/common_ten_dp"
                 android:text="@string/movie_rama_director"
-                android:textColor="@color/blue_chambray"
+                android:textColor="@color/blue_whale"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieDescription" />
 
@@ -154,7 +157,8 @@
                 android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginBottom="@dimen/common_ten_dp"
                 android:text="@string/movie_rama_cast"
-                android:textColor="@color/blue_chambray"
+                android:textColor="@color/blue_whale"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieDirectorName" />
 
@@ -175,7 +179,8 @@
                 android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginTop="@dimen/common_twenty_dp"
                 android:text="@string/movie_rama_similar_movies"
-                android:textColor="@color/blue_chambray"
+                android:textColor="@color/blue_whale"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieCastNames" />
 
@@ -200,7 +205,8 @@
                 android:layout_marginHorizontal="@dimen/common_twenty_dp"
                 android:layout_marginTop="@dimen/common_twenty_dp"
                 android:text="@string/movie_rama_reviews"
-                android:textColor="@color/blue_chambray"
+                android:textColor="@color/blue_whale"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/similarMoviesRecyclerView" />
 
@@ -213,7 +219,7 @@
                 android:paddingVertical="@dimen/common_ten_dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/reviewsTitle"
-                tools:itemCount="5"
+                tools:itemCount="2"
                 tools:listitem="@layout/row_review" />
         </LinearLayout>
     </ScrollView>

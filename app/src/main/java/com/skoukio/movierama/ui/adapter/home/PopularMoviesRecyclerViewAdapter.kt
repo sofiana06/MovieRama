@@ -78,6 +78,14 @@ class PopularMoviesRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
+    fun refreshItem(movie: MovieModel) {
+        val previousMovie = movieList.find { it.id == movie.id } ?: return
+        val index = movieList.indexOf(previousMovie)
+        movieList.removeAt(index)
+        movieList.add(index, movie)
+        notifyItemChanged(index)
+    }
+
     fun setFetching(isFetching: Boolean) {
         this.isFetching = isFetching
         notifyDataSetChanged()

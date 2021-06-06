@@ -22,7 +22,7 @@ fun MovieReviewsResponse?.toModel(): MovieReviewsResponseModel {
     return MovieReviewsResponseModel(
         id = this?.id,
         page = this?.page,
-        results = this?.results?.map { it.toModel() } ?: listOf()
+        results = this?.results?.map { it.toModel() }?.take(2)  ?: listOf()
     )
 }
 
